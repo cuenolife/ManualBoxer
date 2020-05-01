@@ -18,14 +18,6 @@
 		Boxer to be used as a gold-farming, game breaking utility. It's a simple tool with a simple purpose. I intended on using it for my own personal benefit and projects, but
 		I decided to allow those of you with access to it, to also use it for your own personal benefit.
 		
-	    README INSTRUCTIONS (for people who only have ManualBoxer.ahk and not ManualBoxer.zip):
-	    -Save this file as ManualBoxer.ahk ("File" -> "Save As" -> ManualBoxer.ahk -> Save as Type -> (*.*)
-	    -Run ManualBoxer.ahk once
-        -Click "SHIFT+ALT+Q" to close ManualBoxer
-	    -Locate ManualBoxer folder that was created. (You can move this folder wherever you want now)
-        -Create a new loginR.png (Screenshot and crop the R from the login screen and make sure to save as loginR.png)
-	    -Run the new ManualBoxer.ahk
-	    -PROFIT???
 		
 		Helpful Search Feature : *CTRL+F*
 		To change a HOTKEY, just edit the names behind the "::" for example: HOME:: represents the HOME KEY ... Change HOME:: to F1:: to set the script to use F1 instead of HOME
