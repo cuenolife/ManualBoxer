@@ -30,7 +30,8 @@ IMPORTANT HOTKEY INFORMATION (DEFAULT)
 
 (for people who only have ManualBoxer.ahk and not ManualBoxer.rar):
 
-	-Save this file as ManualBoxer.ahk ("File" -> "Save As" -> ManualBoxer.ahk -> Save as Type -> (*.*)
+	-Save this file as ManualBoxer.ahk to your desktop("File" -> "Save As" -> ManualBoxer.ahk -> Save as Type -> All File 
+	Types(*.*)
 	-Run ManualBoxer.ahk once
 	-Click "SHIFT+ALT+Q" to close ManualBoxer
 	-Locate ManualBoxer folder that was created. (You can move this folder wherever you want now)
