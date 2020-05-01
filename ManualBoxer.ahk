@@ -32,8 +32,8 @@
 		TAB::	TABS TO THE NEXT Client
 		+TAB::	TABS TO THE PREVIOUS Client (SHIFT + TAB)
 		+!q::	Closes Script (SHIFT + ALT + Q)
-		`::		Suspends Script On a toggle so you can use your keyboard again. However, since ` is used as a toggle, pushing it will not give the ` it's functionality back except
-				for the toggle.
+		`::	Suspends Script On a toggle so you can use your keyboard again. However, since ` is used as a toggle, pushing it will not give the ` it's functionality back except
+			for the toggle.
 		For your convenience and benefit, be sure to update this "Helpful Search Feature" with your new hotkeys if you change them in the future.
 		
 		WARNING: Changing this file name could cause the script to lose functionality. Changes made here MUST be made across
