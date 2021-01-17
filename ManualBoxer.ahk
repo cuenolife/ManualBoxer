@@ -1,6 +1,7 @@
 /*		Author: 	CueNoLife
 		Title:		Manual Boxer - "Multi-boxing, but without the mouse broadcasting compatibility for OSRS"
-		Version: 	1.1
+		Version: 	1.3
+		Update Date: January 16, 2021
 		Twitter:	https://twitter.com/cuenolife
 		Twitch:		https://twitch.tv/cuenolife
 		Discord:	https://discord.gg/zXpcvBp
@@ -28,12 +29,12 @@
 		F9::	Center your Client (after using "HOME::"
 		F8::	Checks to be sure you hooked the right client name into "HOME::"
 		+!c::	SETS USERINPUT ClientCount / MAX_CLIENTS to be used (useful if you don't want the script interacting with windows you don't want to switch to (SHIFT + ALT + c)
-		+!m::	LOGIN TO YOUR MAIN account (DEFAULT: 1) passwords here must match as well (for now until updated) (SHIFT + ALT + m)
+		+!m::	LOGIN TO YOUR MAIN account (DEFAULT: 1) passwords here must match as well (for now until updated) (SHIFT + ALT + m) 
 		TAB::	TABS TO THE NEXT Client
-		+TAB::	TABS TO THE PREVIOUS Client (SHIFT + TAB)
-		+!q::	Closes Script (SHIFT + ALT + Q)
-		`::	Suspends Script On a toggle so you can use your keyboard again. However, since ` is used as a toggle, pushing it will not give the ` it's functionality back except
-			for the toggle.
+		SHIFT + TAB::	TABS TO THE PREVIOUS Client (SHIFT + TAB)
+		SHIFT + ALT Q::	Closes Script (SHIFT + ALT + Q)
+		`::		Suspends Script On a toggle so you can use your keyboard again. However, since ` is used as a toggle, pushing it will not give the ` it's functionality back except
+				for the toggle.
 		For your convenience and benefit, be sure to update this "Helpful Search Feature" with your new hotkeys if you change them in the future.
 		
 		WARNING: Changing this file name could cause the script to lose functionality. Changes made here MUST be made across
@@ -70,8 +71,10 @@ If (A_ScriptDir == A_Desktop){ ;; Checks to make sure you didn't save to DESKTOP
 	FileCreateDir, ManualBoxer
 	SetWorkingDir, ManualBoxer
 	FileCopy, %A_ScriptDir%\ManualBoxer.ahk , ManualBoxer.ahk
+	FileCopy, %A_ScriptDir%\Sorter.ahk, Sorter.ahk
 	} else {
 	}
+/*
 If FileExist(A_ScriptDir . "\MainAccPass.txt"){ ;; WARNING: Changing this file name could cause the script to lose functionality. Changes made here MUST be made across
 												;;	the whole entire script. I am NOT obligated to help you, or show you how to fix it if you break it. However, if you ruin
 												;;	it, you can just delete the folder, and rextract to get the DEFAULT values back. :)
@@ -81,11 +84,11 @@ If FileExist(A_ScriptDir . "\MainAccPass.txt"){ ;; WARNING: Changing this file n
 	FileAppend, ChangeMe, MainAccPass.txt ;; If you changed Line 5 , be sure to change the name here as well
 
 }
-If FileExist(A_ScriptDir . "\AltAccountUserNames.txt"){
+If FileExist(A_ScriptDir . "\AltAccs.txt"){
 	
 	} else {
 	MsgBox, You forgot to setup an account file for your alts or changed the name recently. 1 account per line
-	FileAppend, 1 Line Per Account, AltAccountUserNames.txt
+	FileAppend, 1 Line Per Account, AltAccs.txt
 }
 If FileExist(A_ScriptDir . "\AltPass.txt"){
 	
@@ -93,21 +96,23 @@ If FileExist(A_ScriptDir . "\AltPass.txt"){
 	MsgBox, You forgot to setup an alt account pass file or changed the name recently.
 	FileAppend, ChangeMe, AltPass.txt
 }
+*/
 If FileExist(A_ScriptDir . "\loginR.png"){
 } else {
 	MsgBox, Create a new loginR.png (Screenshot and crop the R from the login screen and make sure to save as loginR.png)
 	exitapp
 	}
+
 MsgBox, Everything found successfully! Enjoy the script!`ncreated by @CueNoLife`nOn Twitter and Twitch!
-MsgBox,,IMPORTANT HOTKEY INFORMATION - PLEASE READ,DEFAULT HOTKEYS unless changed are as follows`n`nHOME:PROMPTS CLIENT NAME INPUT`n`n(EX. RuneLite, OpenOSRS, OSBuddy, Old School Runescape)`n`nTAB: swaps between all the clients going forward, assuming you have one of them active`n`nShift + Tab: swaps between all the clients going backwards, assuming you have one of them active`n`nShift + Alt + M: INPUTS MAIN PASSWORD (Must setup: MainAccPass.txt`n`nShift + Alt + D: LOGIN TO ALTS (Must setup: AltAccountUserNames.txt and AltPass.txt(only supports 1 password) first).`n`n(Shift + Alt + Q: Closes Script`n`nBe sure to read the hotkeys set above. You can also scan through the script with Notepad.`n`nRECOMMEND: Notepad++.
+MsgBox,,IMPORTANT HOTKEY INFORMATION - PLEASE READ,DEFAULT HOTKEYS unless changed are as follows`n`nHOME:PROMPTS CLIENT NAME INPUT`n`n(EX. RuneLite, OpenOSRS, OSBuddy, Old School Runescape)`n`nTAB: swaps between all the clients going forward, assuming you have one of them active`n`nShift + Tab: swaps between all the clients going backwards, assuming you have one of them active`n`nShift + Alt + M: INPUTS MAIN PASSWORD (Must setup: MainAccPass.txt`n`nShift + Alt + D: LOGIN TO ALTS (Must setup: AltAccountUserNames.txt and AltPass.txt(only supports 1 password) first).`n`n(Shift + Alt + Q: Closes Script`n`n(ALT + SHIFT + C): Change HOW many clients are currently opened ... Also have to HOME KEY to fix client ids `n`n`F9: Centers Clients `n`nBe sure to read the hotkeys set above. You can also scan through the script with Notepad.`n`nRECOMMEND: Notepad++.
 
 `::
 suspend
 return
+/*
 +!d::
-FileRead, AltPass, %A_ScriptDir%\AltPass.txt
-FileRead, str, AltAccountUserNames.txt
-accN := StrSplit(str, "`n")
+FileRead, str, %A_ScriptDir%\AccountsSetup.txt
+accN := StrSplit(str, ":")
 if WinActive(titleN){
 		ImageSearch, FoundX, FoundY, 0, 0, A_ScreenWidth, A_ScreenHeight, %A_ScriptDir%\loginR.png
 		if (ErrorLevel = 2){
@@ -118,17 +123,20 @@ if WinActive(titleN){
 			}
 		else {
 			SendInput, % accN[a]
-			SendInput, %AltPass% {enter}
-			a++
-			if (a>4) {
+			SendInput,{enter}
+			SendInput, % accN[a+1]
+			SendInput,{enter}
+			a+=2
+			if (a>maxClients*2) {
 			a := 1
 			}
 			}
 } else {
 	MsgBox, Please only type your password in %titleN% clients!
 }
-
 return
+
+
 +!m::
 FileRead, MainAccPass, %A_ScriptDir%\MainAccPass.txt
 if WinActive(titleN){
@@ -147,6 +155,8 @@ if WinActive(titleN){
 }
 
 return
+
+*/
 Home:: ;;OPENS INPUT BOX for your CLIENT_NAME - Instructions inside the box
 PreviousClient = %titleN% ;;SETS PREVIOUSCLIENT as THE CURRENT CLIENT before running a LOOP to check for client change
 Loop{ ;; Jenky Loop to make sure you input a client name.
@@ -185,6 +195,7 @@ if WinActive(titleN){
 
 WinActivate % "ahk_pid" cPIDs[c]
 }
+
 return
 
 +Tab::
@@ -217,3 +228,8 @@ return
 +!q::
 exitapp
 return
+/*
+XButton2::
+SendInput, {ESC}
+return
+*/
